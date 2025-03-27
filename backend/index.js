@@ -59,6 +59,10 @@ const Blog = mongoose.model('Blog', BlogSchema);
 
 // Routes
 // Signup
+app.get('/',async(req,res)=>{
+  res.status(200).send("<h1>Backend is working fine<h1>")
+})
+
 app.post('/api/signup', async (req, res) => {
   const { name, email, password } = req.body; // Accept name
   try {
