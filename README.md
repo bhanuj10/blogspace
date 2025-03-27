@@ -59,6 +59,8 @@ npm install
 ```
 #### **c. Create a `.env` File**
 Create a `.env` file in the backend directory with the following variables:
+
+(This will only work if you add the VITE_)
 ```env
 VITE_API_URL='http://localhost:5000/api'
 ```
