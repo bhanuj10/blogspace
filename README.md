@@ -5,7 +5,7 @@
 If you haven't already cloned the repository, do so using the following command:
 ```bash
 git clone <repository-url>
-cd blogspot
+cd blogspace
 ```
 
 ---
@@ -26,7 +26,7 @@ npm install
 #### **c. Create a `.env` File**
 Create a `.env` file in the backend directory with the following variables:
 ```env
-MONGO_URI=mongodb://localhost:27017/blogspot
+MONGO_URI=mongodb://localhost:27017/blogspace
 PORT=5000
 JWT_SECRET=your_jwt_secret_key
 ```
