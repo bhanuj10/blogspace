@@ -9,11 +9,13 @@ export interface Blog {
   title: string;
   content: string;
   created_at: string;
+  author_email: string; // Add this property to match the expected structure
 }
 
 export default function MyPosts() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [error, setError] = useState('');
+  const loggedInEmail = localStorage.getItem('email'); // Get the logged-in user's email
 
   useEffect(() => {
     fetchMyBlogs(); // Ensure this is only called once
@@ -62,12 +64,14 @@ export default function MyPosts() {
                       {format(new Date(blog.created_at), 'PPP')}
                     </p>
                   </div>
-                  <button
-                    onClick={() => handleDelete(blog.id)}
-                    className="text-red-600 hover:text-red-800"
-                  >
-                    <Trash2 className="h-5 w-5" />
-                  </button>
+                  {blog.author_email === loggedInEmail && ( // Show delete button only for the author's blogs
+                    <button
+                      onClick={() => handleDelete(blog.id)}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      <Trash2 className="h-5 w-5" />
+                    </button>
+                  )}
                 </div>
                 <p className="mt-4 text-gray-700 whitespace-pre-wrap">{blog.content}</p>
               </div>
