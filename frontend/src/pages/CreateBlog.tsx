@@ -13,7 +13,7 @@ export default function CreateBlog() {
     e.preventDefault();
     try {
       const author_email = localStorage.getItem('email'); // Fetch email from localStorage
-      await createBlog(title, content, author_email || '');
+      await createBlog(title, content, author_email || ''); // Pass author_email
       navigate('/my-posts');
     } catch (error: any) {
       setError('An error occurred while creating the blog.');

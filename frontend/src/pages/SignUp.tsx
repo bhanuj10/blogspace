@@ -12,7 +12,7 @@ export default function SignUp() {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(import.meta.env.VITE_API_URL || 'http://localhost:5000/api', {
+      const response = await fetch(import.meta.env.VITE_API_URL+"/signup" || 'http://localhost:5000/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }), // Include name

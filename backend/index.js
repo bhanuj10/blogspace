@@ -94,8 +94,7 @@ app.post('/api/signin', async (req, res) => {
 
 // Protect the Create Blog route
 app.post('/api/blogs', authenticateToken, async (req, res) => {
-  const { title, content } = req.body;
-  const author_email = req.user.email; // Use email from the token
+  const { title, content, author_email } = req.body; // Accept author_email from the request body
 
   try {
     const user = await User.findOne({ email: author_email });
