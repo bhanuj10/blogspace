@@ -20,8 +20,8 @@ export default function SignIn() {
         throw new Error('Invalid email or password');
       }
       const data = await response.json();
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('email', email); // Store email
+      localStorage.setItem('token', data.token); // Store JWT token
+      localStorage.setItem('email', email); // Store email for reference
       navigate('/home');
     } catch (error: any) {
       setError(error.message);

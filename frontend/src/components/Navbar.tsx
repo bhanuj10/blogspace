@@ -5,9 +5,9 @@ import { PenSquare, BookOpen, LogOut } from 'lucide-react';
 export default function Navbar() {
   const navigate = useNavigate();
 
-  const handleSignOut = async () => {
-    // Simulate sign-out
-    console.log('User signed out');
+  const handleSignOut = () => {
+    localStorage.removeItem('token'); // Remove JWT token
+    localStorage.removeItem('email'); // Remove email
     navigate('/signin');
   };
 
@@ -22,17 +22,13 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="flex items-center space-x-4">
-            <Link to="/create" className="flex items-center space-x-1 text-gray-600 hover:text-indigo-600">
-              <PenSquare className="h-5 w-5" />
-              <span>Create Post</span>
-            </Link>
+            <Link to="/create" className="text-gray-600 hover:text-indigo-600">Create Post</Link>
             <Link to="/my-posts" className="text-gray-600 hover:text-indigo-600">My Posts</Link>
             <button
               onClick={handleSignOut}
-              className="flex items-center space-x-1 text-gray-600 hover:text-indigo-600"
+              className="text-gray-600 hover:text-indigo-600"
             >
-              <LogOut className="h-5 w-5" />
-              <span>Sign Out</span>
+              Sign Out
             </button>
           </div>
         </div>
