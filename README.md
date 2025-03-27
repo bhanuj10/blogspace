@@ -57,8 +57,13 @@ Run the following command to install the required dependencies:
 ```bash
 npm install
 ```
+#### **c. Create a `.env` File**
+Create a `.env` file in the backend directory with the following variables:
+```env
+VITE_API_URL='http://localhost:5000/api'
+```
 
-#### **c. Start the Frontend Development Server**
+#### **d. Start the Frontend Development Server**
 Run the following command to start the frontend development server:
 ```bash
 npm run dev
