@@ -1,6 +1,5 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PenSquare, BookOpen, LogOut } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
+            <Link to="/home" className="flex items-center space-x-2">
               <BookOpen className="h-6 w-6 text-indigo-600" />
               <span className="font-bold text-xl text-gray-800">BlogSpace</span>
             </Link>
