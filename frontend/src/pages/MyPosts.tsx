@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import Navbar from '../components/Navbar';
 import { Trash2 } from 'lucide-react';
@@ -10,6 +10,7 @@ export interface Blog {
   content: string;
   created_at: string;
   author_email: string; // Add this property to match the expected structure
+  author_name?: string; // Add this property to match the expected structure
 }
 
 export default function MyPosts() {
@@ -18,7 +19,7 @@ export default function MyPosts() {
   const loggedInEmail = localStorage.getItem('email'); // Get the logged-in user's email
 
   useEffect(() => {
-    fetchMyBlogs(); // Ensure this is only called once
+    fetchMyBlogs();
   }, []); // Empty dependency array ensures it runs only once
 
   const fetchMyBlogs = async () => {
@@ -27,6 +28,7 @@ export default function MyPosts() {
       const formattedBlogs = data.map((blog: any) => ({
         ...blog,
         id: blog._id, // Map _id to id
+        author_email: blog.author_email, // Ensure this field is included
       }));
       setBlogs(formattedBlogs);
     } catch (error: any) {
@@ -64,7 +66,7 @@ export default function MyPosts() {
                       {format(new Date(blog.created_at), 'PPP')}
                     </p>
                   </div>
-                  {blog.author_email === loggedInEmail && ( // Show delete button only for the author's blogs
+                  {blog.author_email.toLowerCase() === loggedInEmail?.toLowerCase() && (
                     <button
                       onClick={() => handleDelete(blog.id)}
                       className="text-red-600 hover:text-red-800"

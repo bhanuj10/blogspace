@@ -67,7 +67,7 @@ app.post('/api/signup', async (req, res) => {
   const { name, email, password } = req.body; // Accept name
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ name, email, password: hashedPassword }); // Save name
+    const newUser = new User({ name, email:email.toLowerCase(), password: hashedPassword }); // Save name
     await newUser.save();
     res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
@@ -79,7 +79,7 @@ app.post('/api/signup', async (req, res) => {
 app.post('/api/signin', async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
@@ -89,7 +89,7 @@ app.post('/api/signin', async (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ email: user.email.toLowerCase() }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token });
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
@@ -132,7 +132,7 @@ app.get('/api/blogs', authenticateToken, async (req, res) => {
 // Protect the Delete Blog route
 app.delete('/api/blogs/:id', authenticateToken, async (req, res) => {
   const { id } = req.params;
-  const author_email = req.user.email; // Use email from the token
+  const author_email = req.user.email.toLowerCase(); // Use email from the token
 
   try {
     const blog = await Blog.findOneAndDelete({ _id: id, author_email }); // Ensure the blog belongs to the user

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { UserPlus } from 'lucide-react';
+import { UserPlus, Trash2 } from 'lucide-react';
 
 export default function SignUp() {
   const [name, setName] = useState('');
@@ -24,6 +24,17 @@ export default function SignUp() {
     } catch (error: any) {
       setError(error.message);
     }
+  };
+
+  const handleDelete = (id: string) => {
+    console.log(`Delete blog with id: ${id}`);
+  };
+
+  const loggedInEmail = email; // Example logged-in email
+
+  const blog = {
+    id: '1',
+    author_email: 'example@example.com',
   };
 
   return (
@@ -116,6 +127,19 @@ export default function SignUp() {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          {blog.author_email.toLowerCase() === loggedInEmail?.toLowerCase() && (
+            <button
+              onClick={() => handleDelete(blog.id)}
+              className="text-red-600 hover:text-red-800"
+            >
+              <Trash2 className="h-5 w-5" />
+            </button>
+          )}
         </div>
       </div>
     </div>
