@@ -21,6 +21,7 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="flex items-center space-x-4">
+            <Link to="/home" className="text-gray-600 hover:text-indigo-600">Home</Link>
             <Link to="/create" className="text-gray-600 hover:text-indigo-600">Create Post</Link>
             <Link to="/my-posts" className="text-gray-600 hover:text-indigo-600">My Posts</Link>
             <button
